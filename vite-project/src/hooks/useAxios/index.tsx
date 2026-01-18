@@ -17,8 +17,8 @@ export const useAxios = () => {
       },
       data: body,
       params: {
-        access_token: import.meta.env.VITE_ACCESS_TOKEN,
-        ...params,
+        access_token: "64aecf3b54abde61153d1fd3",
+        ...params, 
        },
     })
       .then((res) => res.data.data)
