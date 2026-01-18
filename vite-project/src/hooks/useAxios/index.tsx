@@ -17,9 +17,9 @@ export const useAxios = () => {
       },
       data: body,
       params: {
-        access_token: import.meta.env.VITE_ACCESS_TOKEN || '',
+        access_token: import.meta.env.VITE_ACCESS_TOKEN,
         ...params,
-      },
+       },
     })
       .then((res) => res.data.data)
       .catch((error) => {
