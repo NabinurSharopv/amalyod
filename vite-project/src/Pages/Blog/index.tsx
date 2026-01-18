@@ -1,7 +1,11 @@
+import Header from "../../components/header"
 
 const Blog = () => {
   return (
-    <div>index</div>
+    <>
+     <Header />
+      index
+      </>
   )
 }
 

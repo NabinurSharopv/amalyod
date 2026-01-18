@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import img1 from "../../assets/img/img1.png";
 import img2 from "../../assets/img/img2.png";
+ import { FaRegBell } from "react-icons/fa6";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -18,16 +19,21 @@ const Header = () => {
             />
           </Link>
         </div>
- 
+
         <div className="flex gap-5">
-          <Link to={"/"}  className={`${pathname === "/" && "text-main"}`}>Home</Link>
-          <Link to={"/blog"} className={`${pathname === "/blog" ? "text-[#46A358]" : "text-black"}`}  >Blog</Link>
+          <Link to={"/"}  className={`${pathname === "/" && "text-main"} font-bold`}>
+          Home
+          </Link>
+          <Link to={"/blog"} className={`${pathname === "/blog" ? "text-[#46A358]" : "text-black"}`}  >
+          Blog
+          </Link>
         </div>
         <div className="flex items-center gap-5">
           <button className="text-[20px] cursor-pointer"><img src={img1} alt="" /></button>
           <button className="text-[20px] cursor-pointer"><img src={img2} alt="" /></button>
+          <FaRegBell />
           <button className="text-white w-[100px] h-[35px] bg-[#46A358] flex items-center gap-1 justify-center rounded-md max-md:hidden cursor-pointer">
-            🔐 Login
+            <p className="font-medium">Login</p>
           </button>
         </div>
       </div>
