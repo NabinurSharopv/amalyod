@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+    --color-rang:  red;
+    --color-main: #46A358;
+} 
