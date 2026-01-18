@@ -24,14 +24,14 @@ const Header = () => {
           <Link to={"/"}  className={`${pathname === "/" && "text-main"} font-bold`}>
           Home
           </Link>
-          <Link to={"/blog"} className={`${pathname === "/blog" ? "text-[#46A358]" : "text-black"}`}  >
+          <Link to={"/blog"} className={`${pathname === "/blog" ? "text-main" : "text-black"  } font-bold `}  >
           Blog
           </Link>
         </div>
         <div className="flex items-center gap-5">
           <button className="text-[20px] cursor-pointer"><img src={img1} alt="" /></button>
           <button className="text-[20px] cursor-pointer"><img src={img2} alt="" /></button>
-          <FaRegBell />
+          <FaRegBell className="text-[20px]" />
           <button className="text-white w-[100px] h-[35px] bg-[#46A358] flex items-center gap-1 justify-center rounded-md max-md:hidden cursor-pointer">
             <p className="font-medium">Login</p>
           </button>
