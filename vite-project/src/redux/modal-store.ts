@@ -1,21 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type InitialStateType = {
-  authorizationModalVisiblity: boolean;
-};
+interface InitialStateType {
+  authorizationModalVisibility: boolean;
+}
 
 const initialState: InitialStateType = {
-  authorizationModalVisiblity: true,
+  authorizationModalVisibility: false,
 };
+
 export const modalSlice = createSlice({
   name: "modal-slice",
   initialState,
   reducers: {
-    setAuthorizationModalVisiblity(state) {
-      state.authorizationModalVisiblity = !state.authorizationModalVisiblity;
+    setAuthorizationModalVisibility: (state) => {
+      state.authorizationModalVisibility = !state.authorizationModalVisibility;
     },
-  } ,
+  },
 });
 
-export const { setAuthorizationModalVisiblity } = modalSlice.actions;   
+export const { setAuthorizationModalVisibility } = modalSlice.actions;
 export default modalSlice.reducer;

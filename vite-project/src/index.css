@@ -1,1 +1,4 @@
 @import "tailwindcss"; 
+.l{
+    position: absolute;
+}
