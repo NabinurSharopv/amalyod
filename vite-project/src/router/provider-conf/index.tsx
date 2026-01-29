@@ -2,12 +2,12 @@ import Modals from '../../components/modals';
 import { Provider } from 'react-redux';
 import { store } from '../../redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
-// 1. QueryClientni komponentdan TASHQARIDA e'lon qiling
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false, // Xato bo'lsa qayta-qayta so'rov yubormaslik uchun
+      retry: false,
       refetchOnWindowFocus: false,
     },
   },
@@ -15,9 +15,12 @@ const queryClient = new QueryClient({
 
 const ProviderConf = ({ children }: { children: React.ReactNode }) => {
   return (
-    // 2. QueryClientProvider eng tepada bo'lishi kerak
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
+        <Toaster 
+          position="top-center" 
+          containerStyle={{ zIndex: 999999 }} 
+        />
         {children}
         <Modals />
       </Provider>

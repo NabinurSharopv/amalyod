@@ -1,15 +1,19 @@
+import Dashboard from "../../components/dashboard"
 import Header from "../../components/header"
-import Page1 from "../../components/Page1"
-import Page2 from "../../components/Page2"  
-import Showcase from "../../components/showcase"
+import Hero from "../../components/hero"
+// import Page1 from "../../components/Page1"
+// import Page2 from "../../components/Page2"  
 
 const Home = () => {
   return (
     <>
       <Header />
-       <Showcase />
-       <Page1 />
-       <Page2 />
+       <div>
+        <Hero />
+       </div>
+       <Dashboard />
+       {/* <Page1 />
+       <Page2 /> */}
     </>
   )
 }

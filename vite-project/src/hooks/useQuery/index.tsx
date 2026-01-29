@@ -1,38 +1,42 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery as useReactQuery } from "@tanstack/react-query";
 import { useAxios } from "../useAxios";
 import type { LoginType } from "../../@types";
 
-interface QueryHandlerType {
-    url: string;
-    pathname: string;    
-    param?: object;
-}
+// options ichiga "param" ni ham qo'shdik
+export const useQueryHandler = (options: { url: string; pathname: string; param?: object }) => {
+  const request = useAxios();
+  
+  return useReactQuery({
+    queryKey: [options.pathname], // pathname o'zgarganda so'rov qayta ketadi
+    queryFn: () => request({
+      url: options.url,
+      method: "GET",
+      param: options.param, // MUHIM: Parametrlarni bu yerda uzatish kerak!
+    }),
+  });
+};
 
-// 1. Ma'lumotlarni olish uchun (GET)
-export const useQueryHandler = ({ url, pathname, param }: QueryHandlerType) => {
-    const axios = useAxios();
-    return useQuery({
-        queryKey: [pathname, param],
-        queryFn: () => axios({ url, method: 'GET', params: param }).then(res => res.data),
-    }); 
-}
+export const useQuery = (options: { url: string; pathname: string }) => {
+  const request = useAxios();
+  
+  return useReactQuery({
+    queryKey: [options.pathname],
+    queryFn: () => request({
+      url: options.url,
+      method: "GET"
+    }),
+  });
+};
 
-// 2. LOGIN QILISH UCHUN (POST) - BU JUDA MUHIM!
 export const useLoginMutate = () => {
-    const axios = useAxios();
-    
-    return useMutation({
-        mutationFn: (data: LoginType) => 
-            axios({ 
-                url: "/user/login", // O'zingizning API yo'lingizni yozing
-                method: "POST", 
-                data 
-            }).then(res => res.data),
-        onSuccess: (res) => {
-            console.log("Login muvaffaqiyatli:", res);
-        },
-        onError: (err) => {
-            console.error("Login xatosi:", err);
-        }
-    });
+  const request = useAxios();
+  
+  return useMutation({
+    mutationFn: (loginData: LoginType) => 
+      request({
+        url: "/user/login", 
+        method: "POST",
+        data: loginData 
+      }),
+  });
 }
