@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { HeartOutlined, ShoppingCartOutlined, SearchOutlined } from "@ant-design/icons";
 import { useReduxDispatch } from "../../../../hooks/useRedux";
 import { getData } from "../../../../redux/shop-slice";

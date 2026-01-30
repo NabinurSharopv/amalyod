@@ -5,27 +5,25 @@ import Prices from "./prices";
 const CardTotal = () => {
   const navigate = useNavigate();
   const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState(0); // <--- Bu ishlatilishi kerak
   const [couponApplied, setCouponApplied] = useState(false);
 
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (couponCode.trim() === "") return;
     
-    // Bu yerda coupon tekshirish logikasi bo'ladi
-    // Masalan: "SAVE10" - 10% chegirma
     if (couponCode.toUpperCase() === "SAVE10") {
-      setDiscount(10); // 10% chegirma
+      setDiscount(10); 
       setCouponApplied(true);
       alert("Coupon applied! 10% discount!");
     } else if (couponCode.toUpperCase() === "FREESHIP") {
-      setDiscount(0); // Bepul yetkazish
+      setDiscount(0); 
       setCouponApplied(true);
       alert("Free shipping applied!");
     } else {
       alert("Invalid coupon code!");
       setCouponApplied(false);
+      setDiscount(0);
     }
   };
 
@@ -51,14 +49,15 @@ const CardTotal = () => {
         </button>
       </form>
       
-      {/* Coupon holati */}
       {couponApplied && (
         <div className="mt-2 text-sm text-green-600 font-medium">
-          ✓ Coupon "{couponCode}" applied
+          {/* DISCOUNT ENDI BU YERDA ISHLATILDI */}
+          ✓ Coupon "{couponCode}" applied {discount > 0 ? `(${discount}% off)` : ""}
         </div>
       )}
       
-      <Prices />
+      {/* Agar Prices komponenti chegirmani hisoblay olsa, unga ham bering: */}
+      <Prices /> 
       
       <button 
         onClick={() => navigate("/proceed-checkout")}
