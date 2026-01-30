@@ -5,12 +5,11 @@ import googlePng from "../../../../../assets/img/google.png";
 import facebookPng from "../../../../../assets/img/facebook.png";
 import { Loader } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { signInWithGoogle } from "../../../../../firebase/config";
-import Cookies from "js-cookie";
-import { useReduxDispatch } from "../../../../../hooks/useRedux";
-import { getUser } from "../../../../../redux/user-slice";
-import { setAuthorizationModalVisibility } from "../../../../../redux/modal-store";
-import type { useActionData } from "react-router-dom";
+// import { signInWithGoogle } from "../../../../../firebase/config";
+// import Cookies from "js-cookie";
+// import { useReduxDispatch } from "../../../../../hooks/useRedux";
+// import { getUser } from "../../../../../redux/user-slice";
+// import { setAuthorizationModalVisibility } from "../../../../../redux/modal-store";
 
 const Login = () => {
   const input_style = "h-[45px] mt-2 !border-[#46A358]";
@@ -18,11 +17,11 @@ const Login = () => {
     "border h-[45px] border-[#EAEAEA] rounded-md flex items-center justify-center gap-3 mb-4 cursor-pointer hover:bg-gray-50 transition-all active:scale-95";
 
   const { mutate, isPending } = useLoginMutation();
-  const dispatch = useReduxDispatch(); // ✅ Dispatch qo'shildi
+  // const dispatch = useReduxDispatch(); // ✅ Dispatch qo'shildi
 
   const onAuth = (values: LoginType) => {
     mutate(values, {
-      onSuccess: () => {
+      onSuccess: () => {    
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -35,54 +34,53 @@ const Login = () => {
     });
   };
 
-  const googleLogin = async () => {
-    console.log("1. Google login boshlanmoqda...");
+  // const googleLogin = async () => {
     
-    try {
-      console.log("2. signInWithGoogle chaqirilmoqda...");
-      const result = await signInWithGoogle();
-      console.log("3. Google login natijasi:", result);
+  //   try {
+  //     console.log("2. signInWithGoogle chaqirilmoqda...");
+  //     const result = await signInWithGoogle();
+  //     console.log("3. Google login natijasi:", result);
       
-      const user = result.user;
-      const token = await user.getIdToken();
+  //     const user = result.user;
+  //     const token = await user.getIdToken();
       
-      console.log("4. User ma'lumotlari:", {
-        uid: user.uid,
-        email: user.email,
-        name: user.displayName,
-        photoURL: user.photoURL
-      });
+  //     console.log("4. User ma'lumotlari:", {
+  //       uid: user.uid,
+  //       email: user.email,
+  //       name: user.displayName,
+  //       photoURL: user.photoURL
+  //     });
       
-      // Redux state ga saqlash
-      const userData = {
-        _id: user.uid,
-        name: user.displayName || user.email || "Google User",
-        email: user.email,
-        profile_photo: user.photoURL
-      };
+  //     // Redux state ga saqlash
+  //     const userData = {
+  //       _id: user.uid,
+  //       name: user.displayName || user.email || "Google User",
+  //       email: user.email,
+  //       profile_photo: user.photoURL
+  //     };
       
-      dispatch(getUser(userData));
-      console.log("5. Redux state ga saqlandi");
+  //     dispatch(getUser(userData));
+  //     console.log("5. Redux state ga saqlandi");
       
-      // Cookie ga saqlash
-      Cookies.set("token", token);
-      Cookies.set("user", JSON.stringify(userData));
-      console.log("6. Cookie ga saqlandi");
+  //     // Cookie ga saqlash
+  //     Cookies.set("token", token);
+  //     Cookies.set("user", JSON.stringify(userData));
+  //     console.log("6. Cookie ga saqlandi");
       
-      // Modalni yopish
-      dispatch(setAuthorizationModalVisibility());
-      console.log("7. Modal yopildi");
+  //     // Modalni yopish
+  //     dispatch(setAuthorizationModalVisibility());
+  //     console.log("7. Modal yopildi");
       
-      toast.success("Google bilan muvaffaqiyatli kirildi!");
+  //     toast.success("Google bilan muvaffaqiyatli kirildi!");
       
-    } catch (error: any) {
-      console.error("8. Google login xatosi:", error);
-      console.error("Error code:", error.code);
-      console.error("Error message:", error.message);
+  //   } catch (error: any) {
+  //     console.error("8. Google login xatosi:", error);
+  //     console.error("Error code:", error.code);
+  //     console.error("Error message:", error.message);
       
-      toast.error("Google login amalga oshmadi!");
-    }
-  };
+  //     toast.error("Google login amalga oshmadi!");
+  //   }
+  // };
 
   const { mutate: mutateGoogle } = useOnAuthGoogle();
  return (

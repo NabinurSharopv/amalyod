@@ -36,7 +36,7 @@ export const useLoginMutate = () => {
       request({
         url: "/user/login", 
         method: "POST",
-        data: loginData 
+        body: loginData
       }),
   });
 }

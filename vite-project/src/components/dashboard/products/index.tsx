@@ -16,40 +16,20 @@ const Products = () => {
   const { data, isLoading, isError }: QueryType<ProductType[]> =
     useQueryHandler({
       url: `flower/category/${category}`,
-      // Pathname ichidagi Range_max-Range_max xatosini tuzatdik
       pathname: `products-${category}-${range_min}-${range_max}-${type}-${sort}`,
-      param: {
-        range_min, // API-ga ketadigan nomlar backend bilan bir xil bo'lishi kerak
-        range_max,
-        type,
-        sort,
-      },
+      param: { range_min, range_max, type, sort },
     });
 
   const { productLoader } = LoaderApi();
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="text-gray-500">Loading products...</div>
-      </div>
-    );
-  }
-  if (isError) {
-    return (
-      <div className="text-center text-red-500 p-8">
-        <h3>Error loading products</h3>
-      </div>
-    );
-  }
   return (
-    <div>
+    <div className="w-full">
       <ProductsTitle />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 ">
+      {/* Gap-6 oraliq uchun eng yaxshisi */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {isLoading || isError
           ? productLoader()
-          : data?.map((value) => <Card key={value._id} {...value} />)}
-        {productLoader()}
+          : data?.map((value: any) => <Card key={value._id} {...value} />)}
       </div>
     </div>
   );

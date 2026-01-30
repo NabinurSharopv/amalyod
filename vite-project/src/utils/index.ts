@@ -4,7 +4,7 @@ export const hero_mock: HeroMockType[] = [
   {
     id: 0,
     title: "Let's Make a Better",
-    subtitle: "WELCOME TO GREENSHOP",
+    subTitle: "WELCOME TO GREENSHOP",
     description: "We are an online plant shop offering a wide range of cheap and trendy plants. Use our plants to create an unique Urban Jungle.",
     buttonText: "SHOP NOW",
     big_img_url: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fflower1.png?alt=media&token=0b",
@@ -13,7 +13,7 @@ export const hero_mock: HeroMockType[] = [
   {
     id: 1,
     title: "LET'S LIVE IN A BETTER",
-    subtitle: "WELCOME TO GREENSHOP",
+    subTitle: "WELCOME TO GREENSHOP",
     description: "We are an online plant shop offering a wide range of cheap and trendy plants. Use our plants to create an unique Urban Jungle.",
     buttonText: "LET'S START",
     big_img_url: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fhero-flower-1.png?alt=media&token=0b",
@@ -22,7 +22,7 @@ export const hero_mock: HeroMockType[] = [
   {
     id: 2,
     title: "LET'S OBSERVE A BETTER",
-    subtitle: "WELCOME TO GREENSHOP",
+    subTitle: "WELCOME TO GREENSHOP",
     description: "We are an online plant shop offering a wide range of cheap and trendy plants. Use our plants to create an unique Urban Jungle.",
     buttonText: "GET CREDITS",
     big_img_url: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fflower3.png?alt=media&token=0b",

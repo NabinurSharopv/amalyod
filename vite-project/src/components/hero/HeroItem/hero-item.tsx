@@ -1,7 +1,6 @@
 // src/components/hero-item/index.tsx
 import type { FC } from "react";
-import type { HeroMockType } from "../../@types";
-
+import type { HeroMockType } from "../../../@types";
 const HeroItem: FC<HeroMockType> = (props) => {
   const { title, subTitle, description, buttonText, big_img_url, small_img_url } = props;
 

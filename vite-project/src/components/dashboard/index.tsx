@@ -3,9 +3,11 @@ import Products from "./products"
 
 const Dashboard = () => {
   return (
-    <div className="mt-5 grid grid-cols-[1fr_3fr] gap-5">
-        <Category />
-        <Products />
+    <div className="max-w-[1490px]   mt-5">
+      <div className="grid grid-cols-[380px_1fr] gap-12">
+          <Category />
+          <Products />
+      </div>
     </div>
   )
 }

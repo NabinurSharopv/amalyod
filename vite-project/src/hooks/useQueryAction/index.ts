@@ -190,7 +190,7 @@ export const useOnAuthGoogle = () => {
             if (error.response?.status === 409) {
         notify("409"); // Email allaqachon mavjud
       } else if (error.message?.includes('popup')) {
-        notify("popup-closed");  
+        (notify as any)("popup-closed");  
       } else {
         notify("error"); 
       }

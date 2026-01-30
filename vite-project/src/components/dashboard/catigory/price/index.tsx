@@ -1,42 +1,68 @@
-import { Slider } from "antd";
-import { useState } from "react";
-import { useSearchParamsHandler } from "../../../../hooks/paramsApi";
+import { useReduxSelector } from "../../../../hooks/useRedux";
 
-const Price = () => {
-  const [sliderValue, setSliderValue] = useState<[number, number]>([0, 1000]);
-  const { setParam } = useSearchParamsHandler();
+const Prices = () => {
+  // Redux store'dan savatcha ma'lumotlarini olish
+  const { data = [] } = useReduxSelector((state) => state.shopSlice);
+
+  const coupon_title_style = "text-[15px] text-[#3D3D3D] font-normal";
+
+  // Xatolarni oldini olish uchun
+  const safeData = Array.isArray(data) ? data : [];
+  
+  // Subtotal hisoblash: narx * counter
+  const subtotal = safeData.reduce((total, item) => {
+    if (!item) return total;
+    
+    const price = Number(item.price) || 0;
+    const counter = Number(item.counter) || 1; // Agar counter bo'lmasa, 1 deb olamiz
+    
+    return total + (price * counter);
+  }, 0);
+
+  // Shipping faqat savatchada narsa bo'lsa qo'shiladi
+  const shipping = subtotal > 0 ? 16.0 : 0;
+
+  // Umumiy total
+  const total = subtotal + shipping;
 
   return (
-    <div className="mt-8">
-      <h3 className="text-[#3d3d3d] font-bold mb-3">Price Range</h3>
-      <Slider 
-        range 
-        value={sliderValue}
-        onChange={(val) => setSliderValue(val)}
-        min={0}
-        max={1000}
-        step={10}
-        className="mb-4"
-      />
-      <div className="flex items-center justify-between mt-4">
-        <span className="text-[#3d3d3d] font-medium text-sm">Price:</span>
-        <span className="text-[#46a358] text-[15px] font-bold">
-          {sliderValue[0]}$ - {sliderValue[1]}$
-        </span>
+    <div className="mt-[20px] space-y-4">
+      {/* Subtotal */}
+      <div className="flex justify-between items-center">
+        <h3 className={coupon_title_style}>Subtotal</h3>
+        <h2 className="text-[#3D3D3D] text-[18px] font-medium">
+          ${subtotal.toFixed(2)}
+        </h2>
       </div>
 
-      {/* TUGMANING KLASSLARINI TO'G'RI YOZISH: */}
-      <button
-        onClick={() => setParam({ 
-          range_min: sliderValue[0], 
-          range_max: sliderValue[1] 
-        })}
-        className="bg-[#46a358] text-white w-full mt-4 py-2 px-4 rounded-md font-bold hover:bg-[#3d8f4d] transition-all cursor-pointer shadow-md active:scale-95"
-      >
-        Filter
-      </button>
+      {/* Savatchadagi mahsulotlar soni (debug uchun) */}
+      <div className="text-xs text-gray-500">
+        {safeData.length} item(s) in cart
+      </div>
+
+      {/* Coupon Discount */}
+      <div className="flex justify-between items-center">
+        <h3 className={coupon_title_style}>Coupon Discount</h3>
+        <h2 className="text-[#3D3D3D] text-[15px] font-medium">(-) $0.00</h2>
+      </div>
+
+      {/* Shipping */}
+      <div className="flex justify-between items-center">
+        <h3 className={coupon_title_style}>Shipping</h3>
+        <h2 className="text-[#3D3D3D] text-[18px] font-medium">
+          ${shipping.toFixed(2)}
+        </h2>
+      </div>
+
+      {/* Total */}
+      <div className="flex justify-between items-center pt-3 border-t">
+        <h2 className="text-[#3D3D3D] text-[16px] font-bold">Total</h2>
+        <h1 className="text-[#46A358] text-[20px] font-bold">
+          ${total.toFixed(2)}
+        </h1>
+      </div>
     </div>
   );
 };
 
-export default Price;
+export default Prices;

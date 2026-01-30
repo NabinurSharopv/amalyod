@@ -1,9 +1,11 @@
-// 1. Foydalanuvchi ma'lumotlari uchun type (Kuki va Redux-da saqlanadi)
 export interface AuthType {
   _id?: string;
   name: string;
-  surname: string;
-  email: string;
+  surname?: string; 
+ email: string | null;
+  profile_photo?: string | null; 
+  uid?: string;         
+  provider?: string;      
   confrm_password?: string;
   password?: string;
   permission?: {
@@ -13,6 +15,14 @@ export interface AuthType {
     read: boolean;
   };
 }
+
+export type NoticationType = 
+  | "login" 
+  | "409" 
+  | "error" 
+  | "popup-closed"
+  | "success"
+  | "404";
 
 export interface LoginType {
   email: string;
@@ -29,7 +39,7 @@ export interface RegisterType {
 export interface HeroMockType {
   id: number;
   title: string;
-  subTitle: string;
+  subTitle: string; 
   description: string;
   buttonText: string;
   big_img_url: string;
@@ -59,7 +69,7 @@ export interface DicountFlowerType {
 }
 
 export interface ProductType {
-  _id: string;
+  _id: string;          // 🔑 YAGONA ID
   title: string;
   price: number;
   main_image: string;
@@ -70,18 +80,50 @@ export interface ProductType {
   detailed_images: string[];
   rate: number;
   views: number;
-  tags: [];
-  comments: [];
+  tags: any[];
+  comments: any[];
   sold_times: number;
   created_by: string;
   created_at: string;
   category: string;
-  count?: number | undefined;
+}
+
+
+export interface ProductsTitleType {
+  id: number;
+  title: string;
+  route_path: string;
+}
+
+export interface AxiosType {
+  url: string;
+  method?: "GET" | "POST" | "PUT" | "DELETE";
+  body?: object;  
+  data?: object; 
+  param?: object;
+}
+
+
+export interface ShopCardType  extends ProductType {
+  counter: number;
+  userPrice: number;
+}
+
+
+
+// Cart item uchun
+export interface CartItemType extends ProductType {
+  quantity: number;
   userPrice?: number;
 }
 
-export interface  ProductsTitleType {
-id:number;
-title: string;
-route_path:string;
+// Cart context uchun  
+export interface CartContextType {
+  cartItems: CartItemType[];
+  addItem: (item: CartItemType) => void;
+  removeItem: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
+  updatePrice: (id: string, price: number) => void;
+  getTotalItems: () => number;
+  getSubtotal: () => number;
 }
