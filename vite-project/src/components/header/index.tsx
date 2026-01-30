@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useReduxDispatch, useReduxSelector } from "../../hooks/useRedux";
 import { setAuthorizationModalVisibility } from "../../redux/modal-store";
 import logo from "../../assets/img/logout.png";
-import img1 from "../../assets/img/vector3.png  ";
+import img1 from "../../assets/img/vector3.png";
 import img2 from "../../assets/img/savat.png";
 import { FaRegBell, FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
