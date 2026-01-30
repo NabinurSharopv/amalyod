@@ -67,7 +67,7 @@ const CardTotal = () => {
       </button>
       
       <Link to="/shop" className="flex justify-center">
-        <button className="mt-[14px] text-[#46A358] cursor-pointer hover:text-[#3d8f4d] transition-colors font-medium">
+        <button className="mt-3.5 text-[#46A358] cursor-pointer hover:text-[#3d8f4d] transition-colors font-medium">
           Continue Shopping
         </button>
       </Link>
